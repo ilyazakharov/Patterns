@@ -1,2 +1,2 @@
 # Explanation of patterns
-##Singleton
+## Singleton
