@@ -1,4 +1,4 @@
-﻿// Patterns for education
+﻿using Patterns.Decorator;
 using Patterns.Observer;
 using Patterns.Singleton;
 using Patterns.Strategy;
@@ -8,23 +8,23 @@ using Patterns.Strategy;
 /// </summary>
 internal class Program
 {
-    /// <summary>
-    ///  Main entry to the program.
-    /// </summary>
-    /// <param name="args">Default parameter.</param>
     private static void Main(string[] args)
     {
-        TestStrategy();
+        TestDecorator();
     }
 
-    /// <summary>
-    /// Shows the singleton pattern.
-    /// </summary>
-    private static void TestSingleton()
+    private static void TestDecorator()
     {
-        // Singleton is the class that's being initialized only once.
-        // All later calls use this initialized instance.
-        Parallel.For(1, 10, x => Console.WriteLine(Singleton.Instance(x).SingletonNum));
+        // Decorator show O-principle of SOLID
+        // You can create as many classes as you need to decorate main class.
+        Operation inOper = new InOperation("Q123", 125.45m);
+        inOper = new OperWithCommission(inOper);
+        Operation outOper = new OperationWithContragent(
+            new OperWithCommission(
+                new OutOperation("RT5543", 42.1m)));
+
+        Console.WriteLine($"{inOper.Description} amount = {inOper.Amount} and number = {inOper.ExtNumber}");
+        Console.WriteLine($"{outOper.Description} amount = {outOper.Amount} and number = {outOper.ExtNumber}");
     }
 
     private static void TestObserver()
@@ -65,9 +65,16 @@ internal class Program
             Console.WriteLine();
         });
 
-        // Using strategy pattern gives us an opportunity to change the behavour ad hoc.
+        // Using Strategy pattern gives us an opportunity to change the behavour ad hoc.
         conveyances[1].Driver = human;
         conveyances[1].MoveForward();
         conveyances[1].ImplementShout();
+    }
+
+    private static void TestSingleton()
+    {
+        // Singleton is the class that's being initialized only once.
+        // All later calls use this initialized instance.
+        Parallel.For(1, 10, x => Console.WriteLine(Singleton.Instance(x).SingletonNum));
     }
 }
