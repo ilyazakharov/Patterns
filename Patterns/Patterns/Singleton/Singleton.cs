@@ -12,7 +12,7 @@
         /// Initializes a new instance of the <see cref="Singleton"/> class.
         /// </summary>
         /// <param name="singletonNum">Value of the instance.</param>
-        public Singleton(int singletonNum)
+        private Singleton(int singletonNum)
         {
             this.SingletonNum = singletonNum;
         }

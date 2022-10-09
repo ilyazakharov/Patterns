@@ -10,6 +10,10 @@
         private static readonly object LockObj = new ();
         private static IntelAccessoriesFactory instance;
 
+        private IntelAccessoriesFactory()
+        {
+        }
+
         /// <summary>
         /// Creates a singletone.
         /// </summary>

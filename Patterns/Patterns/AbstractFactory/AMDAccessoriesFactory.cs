@@ -10,6 +10,10 @@
         private static readonly object LockObj = new ();
         private static AMDAccessoriesFactory instance;
 
+        private AMDAccessoriesFactory()
+        {
+        }
+
         /// <summary>
         /// Creates a singletone. Abstract factories are usually singletons.
         /// </summary>
