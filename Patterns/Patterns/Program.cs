@@ -1,9 +1,10 @@
-﻿using Patterns.Decorator;
+﻿using Patterns.AbstractFactory;
+using Patterns.AbstractFactory.ComputerAccessories;
+using Patterns.Decorator;
 using Patterns.FactoryMethod;
 using Patterns.Observer;
 using Patterns.Singleton;
 using Patterns.Strategy;
-
 /// <summary>
 /// Main program.
 /// </summary>
@@ -11,7 +12,22 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestFactoryMethod();
+        TestAbstractFactory();
+    }
+
+    private static void TestAbstractFactory()
+    {
+        // Abstract factory creates families of different objects.
+        IComputerAccessoriesFactory intelFactory = IntelAccessoriesFactory.Instance();
+        IComputerAccessoriesFactory amdFactory = AMDAccessoriesFactory.Instance();
+
+        List<Computer> computers = new ()
+        {
+            new Computer(intelFactory, "Intel hi-pro", new KingstonMemory()),
+            new Computer(amdFactory, "AMD station", new KingstonMemory()),
+        };
+
+        computers.ForEach(x => Console.WriteLine(x.Description()));
     }
 
     private static void TestFactoryMethod()
