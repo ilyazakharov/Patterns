@@ -1,4 +1,5 @@
 ﻿using Patterns.Decorator;
+using Patterns.FactoryMethod;
 using Patterns.Observer;
 using Patterns.Singleton;
 using Patterns.Strategy;
@@ -10,7 +11,22 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestDecorator();
+        TestFactoryMethod();
+    }
+
+    private static void TestFactoryMethod()
+    {
+        // Factory method can create instances of different entities.
+        OperationCreator bank = new OperationalBank();
+        OperationCreator exchange = new Exchange();
+
+        List<Oper> opers = new List<Oper>()
+        {
+            bank.CreateOperation("UEI1234", 140006.5m),
+            exchange.CreateOperation("KJ235423", 23452.8m),
+        };
+
+        opers.ForEach(x => Console.WriteLine(x.ToString()));
     }
 
     private static void TestDecorator()

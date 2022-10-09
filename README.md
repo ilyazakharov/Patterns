@@ -2,3 +2,4 @@
 ## Singleton
 ## Observer
 ## Strategy
+## FactoryMethod
