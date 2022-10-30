@@ -1,5 +1,6 @@
 ﻿using Patterns.AbstractFactory;
 using Patterns.AbstractFactory.ComputerAccessories;
+using Patterns.Command;
 using Patterns.Decorator;
 using Patterns.FactoryMethod;
 using Patterns.Observer;
@@ -12,7 +13,55 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestAbstractFactory();
+        TestCommand();
+    }
+
+    private static void TestCommand()
+    {
+        // Command pattern lets us to encapslate a request as an object.  
+        ClientAccount acc1 = new("QWERTY", 10);
+        ClientAccount acc2 = new("ASDF", 0);
+
+        List<ICommand> sellCommands = new ()
+        {
+            new SellStock(acc1),
+            new SellStock(acc2),
+        };
+
+        List<ICommand> buyCommands = new ()
+        {
+            new BuyStock(acc1),
+            new BuyStock(acc2),
+        };
+
+        StockExchange exchange = new (sellCommands, buyCommands);
+
+        exchange.Sell(0);
+        exchange.Sell(1);
+        exchange.Redo();
+        exchange.Undo();
+        exchange.Undo();
+        exchange.Undo();
+        exchange.Buy(1);
+        Console.WriteLine(acc1.ToString());
+        Console.WriteLine(acc2.ToString());
+
+        ICommand buy2Sell1Command = new MacroCommand(
+            new List<ICommand>()
+                {
+                    new BuyStock(acc1),
+                    new BuyStock(acc1),
+                    new SellStock(acc1),
+                },
+            new List<ICommand>()
+                {
+                    new SellStock(acc1),
+                });
+        exchange.SellCommands.Add(buy2Sell1Command);
+        exchange.Sell(2);
+        exchange.Redo();
+        exchange.Undo();
+        Console.WriteLine(acc1.ToString());
     }
 
     private static void TestAbstractFactory()
@@ -21,7 +70,7 @@ internal class Program
         IComputerAccessoriesFactory intelFactory = IntelAccessoriesFactory.Instance();
         IComputerAccessoriesFactory amdFactory = AMDAccessoriesFactory.Instance();
 
-        List<Computer> computers = new ()
+        List<Computer> computers = new()
         {
             new Computer(intelFactory, "Intel hi-pro", new KingstonMemory()),
             new Computer(amdFactory, "AMD station", new KingstonMemory()),

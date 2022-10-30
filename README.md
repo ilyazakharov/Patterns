@@ -4,3 +4,4 @@
 ## Strategy
 ## FactoryMethod
 ## AbstractFactory
+## Command
