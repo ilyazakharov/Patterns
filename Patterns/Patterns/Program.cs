@@ -5,7 +5,9 @@ using Patterns.Decorator;
 using Patterns.FactoryMethod;
 using Patterns.Observer;
 using Patterns.Singleton;
+using Patterns.SOLID;
 using Patterns.Strategy;
+
 /// <summary>
 /// Main program.
 /// </summary>
@@ -13,7 +15,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestCommand();
+        SolidTesting.TestSOLID();
     }
 
     private static void TestCommand()

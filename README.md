@@ -5,3 +5,5 @@
 ## FactoryMethod
 ## AbstractFactory
 ## Command
+## SOLID
+Single responsibility principle (SRP)    
