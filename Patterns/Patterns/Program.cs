@@ -1,5 +1,6 @@
 ﻿using Patterns.AbstractFactory;
 using Patterns.AbstractFactory.ComputerAccessories;
+using Patterns.Adapter;
 using Patterns.Command;
 using Patterns.Decorator;
 using Patterns.FactoryMethod;
@@ -15,12 +16,27 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        SolidTesting.TestSOLID();
+        TestAdapter();
+    }
+
+    private static void TestAdapter()
+    {
+        // Adapter adaptizes one interface to the other.
+        ICar car = new SpecificCar();
+        car.Drive();
+        car.Accelerate();
+        car.Stop();
+
+        IPlane plane = new SpecificPlane();
+        PlaneAdapter adapter = new (plane);
+        adapter.Drive();
+        adapter.Accelerate();
+        adapter.Stop();
     }
 
     private static void TestCommand()
     {
-        // Command pattern lets us to encapslate a request as an object.  
+        // Command pattern lets us to encapslate a request as an object.
         ClientAccount acc1 = new("QWERTY", 10);
         ClientAccount acc2 = new("ASDF", 0);
 

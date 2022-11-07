@@ -7,3 +7,4 @@
 ## Command
 ## SOLID
 Single responsibility principle (SRP)    
+## Adapter
