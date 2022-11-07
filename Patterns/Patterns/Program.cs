@@ -3,6 +3,8 @@ using Patterns.AbstractFactory.ComputerAccessories;
 using Patterns.Adapter;
 using Patterns.Command;
 using Patterns.Decorator;
+using Patterns.Facade.FacadeExample;
+using Patterns.Facade.FactoryMethodForFacade;
 using Patterns.FactoryMethod;
 using Patterns.Observer;
 using Patterns.Singleton;
@@ -16,7 +18,18 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestAdapter();
+        TestFacade();
+    }
+
+    private static void TestFacade()
+    {
+        // Facade simplifies work with several objects.
+        // Here we use factory method to create the appropriate facade.
+        IDishMakerCreator chickenWithPotatoesCreator = new ChickenWithPotatoesMakerCreator();
+
+        // Then we use facade, that makes all the needed cooking, although we could do it ourselves.
+        IDishMakerFacade chickenWithPotatoesMaker = chickenWithPotatoesCreator.CreateDishMakerFacade();
+        Console.WriteLine(chickenWithPotatoesMaker.MakeDish());
     }
 
     private static void TestAdapter()
