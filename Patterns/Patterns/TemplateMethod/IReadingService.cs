@@ -32,7 +32,6 @@
         /// </summary>
         void CloseBook()
         {
-
         }
 
         /// <summary>
