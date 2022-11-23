@@ -28,7 +28,7 @@
         void ReadBook();
 
         /// <summary>
-        /// (Optional) Close book.
+        /// (Hook operation) Close book.
         /// </summary>
         void CloseBook()
         {
