@@ -10,6 +10,7 @@ using Patterns.Observer;
 using Patterns.Singleton;
 using Patterns.SOLID;
 using Patterns.Strategy;
+using Patterns.TemplateMethod;
 
 /// <summary>
 /// Main program.
@@ -18,7 +19,17 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestFacade();
+        TestTemplateMethod();
+    }
+
+    private static void TestTemplateMethod()
+    {
+        // Template method define an algorithm and leave the details to be implemented by the child classes.
+        IReadingService classicBook = new ClassicBook();
+        IReadingService eBook = new EBook();
+        classicBook.Process();
+        Console.WriteLine();
+        eBook.Process();
     }
 
     private static void TestFacade()

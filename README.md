@@ -9,3 +9,4 @@
 Single responsibility principle (SRP)    
 ## Adapter
 ## Facade
+## TemplateMethod
