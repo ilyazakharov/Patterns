@@ -6,6 +6,7 @@ using Patterns.Decorator;
 using Patterns.Facade.FacadeExample;
 using Patterns.Facade.FactoryMethodForFacade;
 using Patterns.FactoryMethod;
+using Patterns.Iterator;
 using Patterns.Observer;
 using Patterns.Singleton;
 using Patterns.SOLID;
@@ -19,7 +20,23 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestTemplateMethod();
+        TestIterator();
+    }
+
+    private static void TestIterator()
+    {
+        CafeMenu cafeMenu = new (new List<MenuItem>
+        {
+            new MenuItem("Burger", false),
+            new MenuItem("Salad", true),
+        });
+
+        IMenuItemIterator iterator = cafeMenu.GetIterator();
+        while (iterator.HasNext())
+        {
+            MenuItem item = iterator.Next();
+            Console.WriteLine($"Item: {item.Name}, gluten free: {item.IsGlutenFree}");
+        }
     }
 
     private static void TestTemplateMethod()
