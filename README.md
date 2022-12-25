@@ -11,3 +11,4 @@ Single responsibility principle (SRP)
 ## Facade
 ## TemplateMethod
 ## Iterator
+## Composite

@@ -2,6 +2,7 @@
 using Patterns.AbstractFactory.ComputerAccessories;
 using Patterns.Adapter;
 using Patterns.Command;
+using Patterns.Composite;
 using Patterns.Decorator;
 using Patterns.Facade.FacadeExample;
 using Patterns.Facade.FactoryMethodForFacade;
@@ -12,6 +13,7 @@ using Patterns.Singleton;
 using Patterns.SOLID;
 using Patterns.Strategy;
 using Patterns.TemplateMethod;
+using File = Patterns.Composite.File;
 
 /// <summary>
 /// Main program.
@@ -20,7 +22,41 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestIterator();
+        TestComposite();
+    }
+
+    private static void TestComposite()
+    {
+        Component mainFolder = new Folder("Source");
+        Component secondaryFolder = new Folder("CompositeProject");
+        Component readmeFile = new File("README.MD");
+        Component exeFile = new File("main.exe");
+        Component pictureFile = new File("funny.jpeg");
+
+        mainFolder.Add(secondaryFolder);
+        mainFolder.Add(pictureFile);
+        secondaryFolder.Add(readmeFile);
+        secondaryFolder.Add(exeFile);
+
+        PrintFiles(mainFolder);
+
+        mainFolder.Remove(pictureFile);
+        pictureFile.Print();
+    }
+
+    private static void PrintFiles(Component component)
+    {
+        foreach (Component c in component.GetSubComponents())
+        {
+            try
+            {
+                PrintFiles(c);
+            }
+            catch (NotImplementedException)
+            {
+                c.Open();
+            }
+        }
     }
 
     private static void TestIterator()
