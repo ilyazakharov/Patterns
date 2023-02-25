@@ -3,28 +3,28 @@
     /// <summary>
     /// Classiс paper book.
     /// </summary>
-    public class ClassicBook : IReadingService
+    public class ClassicBook : ReadingService
     {
         /// <inheritdoc/>
-        public void BuyBook()
+        public override void BuyBook()
         {
             Console.WriteLine("Bought a classic book.");
         }
 
         /// <inheritdoc/>
-        public void RateBook()
+        public override void RateBook()
         {
             Console.WriteLine("Rated a classic book.");
         }
 
         /// <inheritdoc/>
-        public void CloseBook()
+        public override void CloseBook()
         {
             Console.WriteLine("Closed a classic book.");
         }
 
         /// <inheritdoc/>
-        public void ReadBook()
+        public override void ReadBook()
         {
             Console.WriteLine("Read a classic book.");
         }

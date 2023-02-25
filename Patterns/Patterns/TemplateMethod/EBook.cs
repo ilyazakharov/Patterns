@@ -3,22 +3,22 @@
     /// <summary>
     /// Electronic book.
     /// </summary>
-    public class EBook : IReadingService
+    public class EBook : ReadingService
     {
         /// <inheritdoc/>
-        public void BuyBook()
+        public override void BuyBook()
         {
             Console.WriteLine("Bought an electronic book.");
         }
 
         /// <inheritdoc/>
-        public void RateBook()
+        public override void RateBook()
         {
             Console.WriteLine("Rated an electronic book.");
         }
 
         /// <inheritdoc/>
-        public void ReadBook()
+        public override void ReadBook()
         {
             Console.WriteLine("Read an electronic book.");
         }

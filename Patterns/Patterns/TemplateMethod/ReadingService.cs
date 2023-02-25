@@ -1,14 +1,14 @@
 ﻿namespace Patterns.TemplateMethod
 {
     /// <summary>
-    /// Reading sevice interface.
+    /// Reading sevice abstract class.
     /// </summary>
-    public interface IReadingService
+    public abstract class ReadingService
     {
         /// <summary>
         /// Overall process for reading a book.
         /// </summary>
-        void Process()
+        public void Process()
         {
             // Template method - sceleton of operations.
             this.BuyBook();
@@ -20,23 +20,23 @@
         /// <summary>
         /// Buy book.
         /// </summary>
-        void BuyBook();
+        public abstract void BuyBook();
 
         /// <summary>
         /// Read book.
         /// </summary>
-        void ReadBook();
+        public abstract void ReadBook();
 
         /// <summary>
         /// (Hook operation) Close book.
         /// </summary>
-        void CloseBook()
+        public virtual void CloseBook()
         {
         }
 
         /// <summary>
         /// Rate book.
         /// </summary>
-        void RateBook();
+        public abstract void RateBook();
     }
 }

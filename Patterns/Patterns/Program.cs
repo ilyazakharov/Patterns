@@ -28,6 +28,7 @@ internal class Program
 
     private static void TestState()
     {
+        // State works very similar to strategy, but it is used for other purposes - the state is internal thing while in strategy pattern it is determined by client.
         Water water = new (50);
         water.Heat();
         water.Heat();
@@ -90,8 +91,8 @@ internal class Program
     private static void TestTemplateMethod()
     {
         // Template method define an algorithm and leave the details to be implemented by the child classes.
-        IReadingService classicBook = new ClassicBook();
-        IReadingService eBook = new EBook();
+        ReadingService classicBook = new ClassicBook();
+        ReadingService eBook = new EBook();
         classicBook.Process();
         Console.WriteLine();
         eBook.Process();
