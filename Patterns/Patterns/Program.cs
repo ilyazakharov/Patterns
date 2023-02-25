@@ -11,6 +11,7 @@ using Patterns.Iterator;
 using Patterns.Observer;
 using Patterns.Singleton;
 using Patterns.SOLID;
+using Patterns.State;
 using Patterns.Strategy;
 using Patterns.TemplateMethod;
 using File = Patterns.Composite.File;
@@ -22,7 +23,18 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestComposite();
+        TestState();
+    }
+
+    private static void TestState()
+    {
+        Water water = new (50);
+        water.Heat();
+        water.Heat();
+        water.Freeze();
+        water.Freeze();
+        water.Freeze();
+        water.Heat();
     }
 
     private static void TestComposite()

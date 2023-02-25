@@ -12,3 +12,4 @@ Single responsibility principle (SRP)
 ## TemplateMethod
 ## Iterator
 ## Composite
+## State
