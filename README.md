@@ -13,3 +13,4 @@ Single responsibility principle (SRP)
 ## Iterator
 ## Composite
 ## State
+## Proxy

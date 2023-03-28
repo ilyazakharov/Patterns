@@ -9,6 +9,7 @@ using Patterns.Facade.FactoryMethodForFacade;
 using Patterns.FactoryMethod;
 using Patterns.Iterator;
 using Patterns.Observer;
+using Patterns.Proxy;
 using Patterns.Singleton;
 using Patterns.SOLID;
 using Patterns.State;
@@ -23,13 +24,28 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestState();
+        TestLazyProxy();
+    }
+
+    /// <summary>
+    /// If there is a heavy class that is not used everytime and you don't want to have it instantiated it and keep in memory you may use Proxy pattern.
+    /// The object is created only when needed. Also it may cache some values.
+    /// </summary>
+    private static void TestLazyProxy()
+    {
+        IHeavyClass heavyClass = new LazyHeavyClassProxy();
+
+        bool isRareEvent = true;
+        if (isRareEvent)
+        {
+            Console.WriteLine(heavyClass.GetValue(10));
+        }
     }
 
     private static void TestState()
     {
         // State works very similar to strategy, but it is used for other purposes - the state is internal thing while in strategy pattern it is determined by client.
-        Water water = new (50);
+        Water water = new(50);
         water.Heat();
         water.Heat();
         water.Freeze();
@@ -74,7 +90,7 @@ internal class Program
 
     private static void TestIterator()
     {
-        CafeMenu cafeMenu = new (new List<MenuItem>
+        CafeMenu cafeMenu = new(new List<MenuItem>
         {
             new MenuItem("Burger", false),
             new MenuItem("Salad", true),
@@ -118,7 +134,7 @@ internal class Program
         car.Stop();
 
         IPlane plane = new SpecificPlane();
-        PlaneAdapter adapter = new (plane);
+        PlaneAdapter adapter = new(plane);
         adapter.Drive();
         adapter.Accelerate();
         adapter.Stop();
@@ -130,19 +146,19 @@ internal class Program
         ClientAccount acc1 = new("QWERTY", 10);
         ClientAccount acc2 = new("ASDF", 0);
 
-        List<ICommand> sellCommands = new ()
+        List<ICommand> sellCommands = new()
         {
             new SellStock(acc1),
             new SellStock(acc2),
         };
 
-        List<ICommand> buyCommands = new ()
+        List<ICommand> buyCommands = new()
         {
             new BuyStock(acc1),
             new BuyStock(acc2),
         };
 
-        StockExchange exchange = new (sellCommands, buyCommands);
+        StockExchange exchange = new(sellCommands, buyCommands);
 
         exchange.Sell(0);
         exchange.Sell(1);
