@@ -3,6 +3,7 @@ using Patterns.AbstractFactory.ComputerAccessories;
 using Patterns.Adapter;
 using Patterns.Command;
 using Patterns.Composite;
+using Patterns.CurcuitBreaker;
 using Patterns.Decorator;
 using Patterns.Facade.FacadeExample;
 using Patterns.Facade.FactoryMethodForFacade;
@@ -24,15 +25,48 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestLazyProxy();
+        TestCirquitBreaker();
     }
 
-    /// <summary>
-    /// If there is a heavy class that is not used everytime and you don't want to have it instantiated it and keep in memory you may use Proxy pattern.
-    /// The object is created only when needed. Also it may cache some values.
-    /// </summary>
+    private static void TestCirquitBreaker()
+    {
+        // Cirquit breaker disables the ability to call the external repository for some time after te repository has thrown an error.
+        ExternalServiceRepository repository = new ExternalServiceRepository();
+        ICircuitBreaker cb = new AntiDdosCurcuitBreaker(2);
+
+        // Everything works fine.
+        repository.ShouldThrow = false;
+        cb.Execute(repository.DoSomeWork);
+
+        // Error is thrown.
+        repository.ShouldThrow = true;
+        cb.Execute(repository.DoSomeWork);
+
+        // Erro is thrown from the cirquit breaker.
+        Task.Delay(1000).Wait();
+        cb.Execute(repository.DoSomeWork);
+
+        // Timeout has passed, tries to call the repository, but fails.
+        Task.Delay(1000).Wait();
+        cb.Execute(repository.DoSomeWork);
+
+        // The repository is fine now, but the exception is thrown by the curuit breaker because the timeout has not passed since last error in repository.
+        Task.Delay(1000).Wait();
+        repository.ShouldThrow = false;
+        cb.Execute(repository.DoSomeWork);
+
+        // Timeout has passed, calls the repository and succeeds.
+        Task.Delay(1000).Wait();
+        cb.Execute(repository.DoSomeWork);
+
+        // Everything works fine.
+        cb.Execute(repository.DoSomeWork);
+    }
+
     private static void TestLazyProxy()
     {
+        /// If there is a heavy class that is not used everytime and you don't want to have it instantiated it and keep in memory you may use Proxy pattern.
+        /// The object is created only when needed. Also it may cache some values.
         IHeavyClass heavyClass = new LazyHeavyClassProxy();
 
         bool isRareEvent = true;
@@ -45,7 +79,7 @@ internal class Program
     private static void TestState()
     {
         // State works very similar to strategy, but it is used for other purposes - the state is internal thing while in strategy pattern it is determined by client.
-        Water water = new(50);
+        Water water = new (50);
         water.Heat();
         water.Heat();
         water.Freeze();

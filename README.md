@@ -14,3 +14,4 @@ Single responsibility principle (SRP)
 ## Composite
 ## State
 ## Proxy
+## Cirquit breaker
