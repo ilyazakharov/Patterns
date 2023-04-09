@@ -2,6 +2,7 @@
 using Patterns.AbstractFactory.ComputerAccessories;
 using Patterns.Adapter;
 using Patterns.Bridge;
+using Patterns.Builder;
 using Patterns.Command;
 using Patterns.Composite;
 using Patterns.CurcuitBreaker;
@@ -26,7 +27,18 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestBridge();
+        TestBuilder();
+    }
+
+    private static void TestBuilder()
+    {
+        // Used when you need to construct a complex object, but the constructing rules should be incapsulated.
+        HouseBuilder houseBuilder = new ();
+        House house = houseBuilder
+            .WithMedievalFacade()
+            .WithPark()
+            .Build();
+        Console.WriteLine(house);
     }
 
     private static void TestBridge()
