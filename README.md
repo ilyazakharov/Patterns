@@ -15,3 +15,4 @@ Single responsibility principle (SRP)
 ## State
 ## Proxy
 ## Cirquit breaker
+## Bridge

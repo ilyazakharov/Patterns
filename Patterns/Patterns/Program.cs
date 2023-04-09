@@ -1,6 +1,7 @@
 ﻿using Patterns.AbstractFactory;
 using Patterns.AbstractFactory.ComputerAccessories;
 using Patterns.Adapter;
+using Patterns.Bridge;
 using Patterns.Command;
 using Patterns.Composite;
 using Patterns.CurcuitBreaker;
@@ -25,7 +26,25 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestCirquitBreaker();
+        TestBridge();
+    }
+
+    private static void TestBridge()
+    {
+        // Usually used when you have two hierarchies and every element in the first hierarchy should be used with every element in the second hierrahy.
+        // the bridge pattern lets you not to create cartesian product for these two hierarchies.
+        IRenderer rasterRenderer = new RasterRenderer();
+        IRenderer vectorRenderer = new VectorRenderer();
+
+        Shape circle = new Circle(rasterRenderer, 10);
+        circle.Draw();
+        circle.Renderer = vectorRenderer;
+        circle.Draw();
+
+        Shape square = new Square(rasterRenderer, 15);
+        square.Draw();
+        square.Renderer = vectorRenderer;
+        square.Draw();
     }
 
     private static void TestCirquitBreaker()
