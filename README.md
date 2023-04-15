@@ -21,3 +21,4 @@
 ## State
 # Other patterns
 ## Cirquit breaker
+## Chain of responsibility
