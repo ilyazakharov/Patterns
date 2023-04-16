@@ -11,6 +11,7 @@ using Patterns.Decorator;
 using Patterns.Facade.FacadeExample;
 using Patterns.Facade.FactoryMethodForFacade;
 using Patterns.FactoryMethod;
+using Patterns.Flyweight;
 using Patterns.Iterator;
 using Patterns.Observer;
 using Patterns.Proxy;
@@ -21,7 +22,39 @@ using Patterns.Strategy;
 using Patterns.TemplateMethod;
 using File = Patterns.Composite.File;
 
-TestChainOfResposibility();
+TestFlyweight();
+
+static void TestFlyweight()
+{
+    // Flyweight is used when there is a huge amount of typical objects and you need to care about memory.
+    // Objects have the same internal state, but can behave differently by accepting some external values.
+    // In this examples units have internal speed, but their strength depends on external factor (CurrentStrength).
+    UnitFactory factory = new();
+
+    for (int i = 0; i < 5; i++)
+    {
+        IUnit? archer = factory.GetUnit("Archer");
+        archer.Move();
+        archer.Strike(CurrentStrength());
+
+        IUnit? knight = factory.GetUnit("Knight");
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        IUnit? knight = factory.GetUnit("Knight");
+        knight.Move();
+        knight.Strike(CurrentStrength() * 2);
+    }
+
+    return;
+
+    int CurrentStrength()
+    {
+        Random rnd = new();
+        return rnd.Next(10, 80);
+    }
+}
 
 static void TestChainOfResposibility()
 {

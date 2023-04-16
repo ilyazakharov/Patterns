@@ -12,6 +12,7 @@
 ## Composite
 ## Decorator
 ## Proxy
+## Flyweight
 # Behavioral patterns
 ## Observer
 ## Template method
