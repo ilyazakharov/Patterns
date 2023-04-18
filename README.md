@@ -20,6 +20,7 @@
 ## Command
 ## Iterator
 ## State
+## Chain of responsibility
+## Interpretor
 # Other patterns
 ## Cirquit breaker
-## Chain of responsibility

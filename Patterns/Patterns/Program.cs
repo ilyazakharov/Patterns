@@ -12,6 +12,7 @@ using Patterns.Facade.FacadeExample;
 using Patterns.Facade.FactoryMethodForFacade;
 using Patterns.FactoryMethod;
 using Patterns.Flyweight;
+using Patterns.Interpretor;
 using Patterns.Iterator;
 using Patterns.Observer;
 using Patterns.Proxy;
@@ -22,7 +23,29 @@ using Patterns.Strategy;
 using Patterns.TemplateMethod;
 using File = Patterns.Composite.File;
 
-TestFlyweight();
+TestInterpretor();
+
+static void TestInterpretor()
+{
+    // If you have some language with simple rules you may use interpretor to describe it.
+    // Interpreter has terminal expression (e.g. IntExpression) and nonterminal expressions (e.g. AddExpression) which may be combined.
+    MathContext context = new();
+
+    int x = 10;
+    int y = 50;
+    int z = 15;
+
+    context.SetValue("x", x);
+    context.SetValue("y", y);
+    context.SetValue("z", z);
+
+    // x + y - z
+    IExpression expr = new SubtractExpression(
+        new AddExpression(new IntExpression("x"), new IntExpression("y")),
+        new IntExpression("z"));
+
+    Console.WriteLine(expr.Interpret(context));
+}
 
 static void TestFlyweight()
 {
@@ -34,8 +57,8 @@ static void TestFlyweight()
     for (int i = 0; i < 5; i++)
     {
         IUnit? archer = factory.GetUnit("Archer");
-        archer.Move();
-        archer.Strike(CurrentStrength());
+        archer?.Move();
+        archer?.Strike(CurrentStrength());
 
         IUnit? knight = factory.GetUnit("Knight");
     }
@@ -43,8 +66,8 @@ static void TestFlyweight()
     for (int i = 0; i < 5; i++)
     {
         IUnit? knight = factory.GetUnit("Knight");
-        knight.Move();
-        knight.Strike(CurrentStrength() * 2);
+        knight?.Move();
+        knight?.Strike(CurrentStrength() * 2);
     }
 
     return;
