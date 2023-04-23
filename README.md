@@ -22,5 +22,6 @@
 ## State
 ## Chain of responsibility
 ## Interpretor
+## Mediator
 # Other patterns
 ## Cirquit breaker

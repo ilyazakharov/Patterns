@@ -14,6 +14,7 @@ using Patterns.FactoryMethod;
 using Patterns.Flyweight;
 using Patterns.Interpretor;
 using Patterns.Iterator;
+using Patterns.Mediator;
 using Patterns.Observer;
 using Patterns.Proxy;
 using Patterns.Singleton;
@@ -23,7 +24,23 @@ using Patterns.Strategy;
 using Patterns.TemplateMethod;
 using File = Patterns.Composite.File;
 
-TestInterpretor();
+TestMediator();
+
+static void TestMediator()
+{
+    // Mediator is used when you have several entities that should talk with each other, but you don't want them to know about each other.
+    ManageMediator mediator = new ManageMediator();
+    Colleague pupil = new Pupil(mediator);
+    Colleague teacher = new Teacher(mediator);
+    Colleague parent = new Parent(mediator);
+    mediator.Parent = parent;
+    mediator.Teacher = teacher;
+    mediator.Pupil = pupil;
+
+    pupil.Send("Why the sky is blue?");
+    teacher.Send("Talk with your kid about physics!");
+    parent.Send("Physics is very important!");
+}
 
 static void TestInterpretor()
 {
