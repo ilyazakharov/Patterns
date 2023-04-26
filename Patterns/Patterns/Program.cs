@@ -17,6 +17,7 @@ using Patterns.Iterator;
 using Patterns.Mediator;
 using Patterns.Memento;
 using Patterns.Observer;
+using Patterns.Prototype;
 using Patterns.Proxy;
 using Patterns.Singleton;
 using Patterns.SOLID;
@@ -25,10 +26,21 @@ using Patterns.Strategy;
 using Patterns.TemplateMethod;
 using File = Patterns.Composite.File;
 
-TestMemento();
+TestPrototype();
+
+static void TestPrototype()
+{
+    // Proptotype is used when you need to clone objects. You also may use IClonable interface or records with "with" statement.
+    IDish soup = new Soup("Minestrone");
+    var clonesDish = soup.Clone();
+
+    Console.WriteLine(soup.Name);
+    Console.WriteLine(clonesDish.Name);
+}
 
 static void TestMemento()
 {
+    // Memento is used when you want to have the ability to save and reload the state of some object.
     GameHistory gameHistory = new ();
     Witcher witcher = new ();
 
