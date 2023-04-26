@@ -1,27 +1,28 @@
 # SOLID
 ## Single responsibility principle (SRP)
 # Creational patterns
-## Singleton
-## Factory method
 ## Abstract factory
 ## Builder
+## Factory method
+## Singleton
 # Structural patterns
 ## Adapter
-## Facade
 ## Bridge
 ## Composite
 ## Decorator
-## Proxy
+## Facade
 ## Flyweight
+## Proxy
 # Behavioral patterns
-## Observer
-## Template method
-## Strategy
-## Command
-## Iterator
-## State
 ## Chain of responsibility
+## Command
 ## Interpretor
+## Iterator
 ## Mediator
+## Memento
+## Observer
+## State
+## Strategy
+## Template method
 # Other patterns
 ## Cirquit breaker

@@ -15,6 +15,7 @@ using Patterns.Flyweight;
 using Patterns.Interpretor;
 using Patterns.Iterator;
 using Patterns.Mediator;
+using Patterns.Memento;
 using Patterns.Observer;
 using Patterns.Proxy;
 using Patterns.Singleton;
@@ -24,7 +25,26 @@ using Patterns.Strategy;
 using Patterns.TemplateMethod;
 using File = Patterns.Composite.File;
 
-TestMediator();
+TestMemento();
+
+static void TestMemento()
+{
+    GameHistory gameHistory = new ();
+    Witcher witcher = new ();
+
+    gameHistory.SaveGame(witcher.Save(), 1);
+
+    witcher.GetDamage(40);
+    Console.WriteLine(witcher);
+
+    var savedWitcher = gameHistory.LoadGame(1);
+    if (savedWitcher is not null)
+    {
+        witcher.Load(savedWitcher);
+    }
+
+    Console.WriteLine(witcher);
+}
 
 static void TestMediator()
 {
