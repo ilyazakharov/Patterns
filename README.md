@@ -25,5 +25,6 @@
 ## State
 ## Strategy
 ## Template method
+## Visitor
 # Other patterns
 ## Cirquit breaker

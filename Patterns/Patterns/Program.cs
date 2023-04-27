@@ -24,9 +24,26 @@ using Patterns.SOLID;
 using Patterns.State;
 using Patterns.Strategy;
 using Patterns.TemplateMethod;
+using Patterns.Visitor;
 using File = Patterns.Composite.File;
 
-TestPrototype();
+TestVisitor();
+
+static void TestVisitor()
+{
+    // Visitor pattern is used when you have a stable structure of classes but the new behavior is added all the time.
+    // Classes may be very different. 
+    IOperational calculator = new Calculator (2, 3);
+    IOperational person = new Person(2, 3);
+    IVisitor addVisitor = new AdditionVisitor();
+    IVisitor multVisitor = new MultiplicationVisitor();
+
+    calculator.Accept(addVisitor);
+    person.Accept(addVisitor);
+
+    calculator.Accept(multVisitor);
+    person.Accept(multVisitor);
+}
 
 static void TestPrototype()
 {
