@@ -1,5 +1,6 @@
 # SOLID
 ## Single responsibility principle (SRP)
+Each class should have only one reason for changing.
 # Creational patterns
 ## Abstract factory
 Provides a way to encapsulate a group of individual factories that have a common theme without specifying their concrete classes.
