@@ -20,7 +20,6 @@ using Patterns.Observer;
 using Patterns.Prototype;
 using Patterns.Proxy;
 using Patterns.Singleton;
-using Patterns.SOLID;
 using Patterns.State;
 using Patterns.Strategy;
 using Patterns.TemplateMethod;
